@@ -4,6 +4,19 @@
 import glob
 import os
 import pandas as pd
+import argparse
+
+def get_args():
+    '''
+    Loads the parser
+    '''
+    # Main parser
+    parser = argparse.ArgumentParser(description="get closest distance to tss")
+    # Args
+    required = parser.add_argument_group("Required input parameters")
+    # Metadata from input table
+    required.add_argument('-g', '--gene_block', required=True, help='Gene block.')
+    return parser.parse_args()
 
 def Distance_to_tss(bedpe, chr, tss, gene_end):
     #read one bedpe file
@@ -38,12 +51,20 @@ def Distance_to_tss(bedpe, chr, tss, gene_end):
         min_abs_distance = total_distance.abs().min()
         return min_abs_distance
 
+def chunks(l, n):
+    """Yield successive n-sized chunks from l."""
+    for i in range(0, len(l), n):
+        yield l[i:i + n]
+
 if __name__ == '__main__':
+    args = get_args()
+    gb = int(args.gene_block)
     print('preparing')
     pcawg_input = glob.glob('part_all/*.part.bedpe')
     map1=pd.read_csv('encode19.csv')
     map1['gene']=map1.chrom.astype(str) + '_' + map1.ENST_id.astype(str)
-    gene_list=map1.gene.tolist()
+    total_gene_list=list(chunks(map1.gene.tolist(), 90))
+    gene_list = total_gene_list[gb]
     chrom_list=map1.chrom.tolist()
     tss_list=map1.TSS.tolist()
     gene_end_list=map1.gene_end.tolist()
@@ -61,4 +82,4 @@ if __name__ == '__main__':
     df = table_list[0]
     for df_ in table_list[1:]:
         df = df.merge(df_, on='aliquot_id')
-    df.to_csv('Table_distance_to_tss.csv', index=False)
+    df.to_csv('Table_distance_to_tss.{}.csv'.format(gb), index=False)
