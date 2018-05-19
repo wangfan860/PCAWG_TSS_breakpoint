@@ -60,8 +60,8 @@ if __name__ == '__main__':
     args = get_args()
     gb = int(args.gene_block)
     print('preparing')
-    pcawg_input = glob.glob('part_all/*.part.bedpe')
-    map1=pd.read_csv('encode19.csv')
+    pcawg_input = glob.glob('/group/lyang-lab/fan/pcawg_data/part_all/*.part.bedpe')
+    map1=pd.read_csv('/group/lyang-lab/fan/pcawg_data/encode19.csv')
     map1['gene']=map1.chrom.astype(str) + '_' + map1.ENST_id.astype(str)
     total_gene_list=list(chunks(map1.gene.tolist(), 90))
     gene_list = total_gene_list[gb]
@@ -82,4 +82,4 @@ if __name__ == '__main__':
     df = table_list[0]
     for df_ in table_list[1:]:
         df = df.merge(df_, on='aliquot_id')
-    df.to_csv('Table_distance_to_tss.{}.csv'.format(gb), index=False)
+    df.to_csv('/group/lyang-lab/fan/pcawg_data/output/Table_distance_to_tss.{}.csv'.format(gb), index=False)
