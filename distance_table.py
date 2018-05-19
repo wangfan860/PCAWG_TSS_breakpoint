@@ -64,10 +64,13 @@ if __name__ == '__main__':
     map1=pd.read_csv('/group/lyang-lab/fan/pcawg_data/encode19.csv')
     map1['gene']=map1.chrom.astype(str) + '_' + map1.ENST_id.astype(str)
     total_gene_list=list(chunks(map1.gene.tolist(), 90))
+    total_chrom_list=list(chunks(map1.chrom.tolist(), 90))
+    total_tss_list=list(chunks(map1.TSS.tolist(), 90))
+    total_gene_end_list=list(chunks(map1.gene_end.tolist(), 90))
     gene_list = total_gene_list[gb]
-    chrom_list=map1.chrom.tolist()
-    tss_list=map1.TSS.tolist()
-    gene_end_list=map1.gene_end.tolist()
+    chrom_list = total_chrom_list[gb]
+    tss_list = total_tss_list[gb]
+    gene_end_list = total_gene_end_list[gb]
     table_list = []
     for i in range(len(gene_list)):
         print(gene_list[i])
