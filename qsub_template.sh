@@ -6,4 +6,7 @@
 #PBS -o /group/lyang-lab/fan/pcawg_data/log/fwang1_XX_CHUNK_XX.stdout.log
 #PBS -e /group/lyang-lab/fan/pcawg_data/log/fwang1_XX_CHUNK_XX.stderr.log
 
+module load gcc/6.2.0
+module load python/3.6.0
+
 /apps/software/gcc-6.2.0/python/3.6.0/bin/python3 /group/lyang-lab/fan/pcawg_data/PCAWG_TSS_breakpoint/distance_table.py -g XX_CHUNK_XX
