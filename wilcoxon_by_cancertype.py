@@ -20,8 +20,8 @@ if __name__ == '__main__':
     args = get_args()
     disease = args.disease_type
 
-    distance_table1=pd.read_csv('/group/lyang-lab/fan/distance1214x76441_for_wilcoxon.csv',index_col=0)
-    expr=pd.read_csv('/group/lyang-lab/fan/expr1214x76441_for_wilcoxon.csv', index_col=0)
+    distance_table1=pd.read_csv('/group/lyang-lab/fan/distance_1214x84147_06052018.csv',index_col=0)
+    expr=pd.read_csv('/group/lyang-lab/fan/expr_1214x84147_06052018.csv', index_col=0)
 
     disease_sv=distance_table1[distance_table1.dcc_project_code == '{}'.format(disease)]
     disease_expr=expr[expr.dcc_project_code == '{}'.format(disease)]
@@ -29,8 +29,8 @@ if __name__ == '__main__':
     table = pd.DataFrame()
     for j in gene_list:
         print(j)
-        smaller=disease_expr[disease_sv[j] < 100000][j].astype(float)
-        bigger=disease_expr[(disease_sv[j] >= 100000) | disease_sv[j].isnull()][j].astype(float)
+        smaller=disease_expr[disease_sv[j] < 100000][j].astype(float).dropna()
+        bigger=disease_expr[(disease_sv[j] >= 100000) | disease_sv[j].isnull()][j].astype(float).dropna()
         results = ss.ranksums(smaller, bigger)
         table = table.append({'cancer_type':'{}'.format(disease),'gene':j, 'pvalue':results[1]},ignore_index=True)
     table.to_csv('/group/lyang-lab/fan/ranksum_{}.csv'.format(disease))
