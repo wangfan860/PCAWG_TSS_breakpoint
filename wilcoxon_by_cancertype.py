@@ -21,7 +21,7 @@ if __name__ == '__main__':
     disease = args.disease_type
 
     distance_table1=pd.read_csv('/group/lyang-lab/labshare/fan/distance84149x1214_0627.csv',index_col=0)
-    expr=pd.read_csv('/group/lyang-lab/labshare/fan/expression84149x1214_0627.csv.csv', index_col=0)
+    expr=pd.read_csv('/group/lyang-lab/labshare/fan/expression84149x1214_0627.csv', index_col=0)
 
     disease_sv=distance_table1[distance_table1.dcc_project_code == '{}'.format(disease)]
     disease_expr=expr[expr.dcc_project_code == '{}'.format(disease)]
