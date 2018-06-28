@@ -33,4 +33,4 @@ if __name__ == '__main__':
         bigger=disease_expr[(disease_sv[j] >= 100000) | disease_sv[j].isnull()][j].astype(float).dropna()
         results = ss.ranksums(smaller, bigger)
         table = table.append({'cancer_type':'{}'.format(disease),'gene':j, 'pvalue':results[1]},ignore_index=True)
-    table.to_csv('/group/lyang-lab/fan/ranksum_{}.csv'.format(disease))
+    table.to_csv('/group/lyang-lab/labshare/fan/ranksum_{}.csv'.format(disease))
