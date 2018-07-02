@@ -21,7 +21,7 @@ if __name__ == '__main__':
     disease = args.disease_type
 
     distance_table1=pd.read_csv('/group/lyang-lab/labshare/fan/distance84149x1214_0627.csv',index_col=0)
-    expr=pd.read_csv('/group/lyang-lab/labshare/fan/expression84149x1214_0627.csv', index_col=0)
+    expr=pd.read_csv('/group/lyang-lab/labshare/fan/correct_oldnorm_expression84149x1214_0630.csv', index_col=0)
 
     disease_sv=distance_table1[distance_table1.dcc_project_code == '{}'.format(disease)]
     disease_expr=expr[expr.dcc_project_code == '{}'.format(disease)]
@@ -33,4 +33,4 @@ if __name__ == '__main__':
         bigger=disease_expr[(disease_sv[j] >= 100000) | disease_sv[j].isnull()][j].astype(float).dropna()
         results = ss.ranksums(smaller, bigger)
         table = table.append({'cancer_type':'{}'.format(disease),'gene':j, 'pvalue':results[1]},ignore_index=True)
-    table.to_csv('/group/lyang-lab/labshare/fan/ranksum_{}.csv'.format(disease))
+    table.to_csv('/group/lyang-lab/labshare/fan/4th_run_correct_oldnorm/ranksum_{}.csv'.format(disease))
