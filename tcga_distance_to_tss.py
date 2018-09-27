@@ -17,7 +17,7 @@ def get_args():
 
 def Distance_to_tss(bedpe, chr, tss):
     #read one bedpe file
-    aliquot_id_data = pd.read_csv(bedpe)
+    aliquot_id_data = pd.read_csv(bedpe, sep='\t')
     select = aliquot_id_data[aliquot_id_data.Chromosome.astype(str) == str(chr)]
     distance_1 = select.Start - int(tss)
     distance_2 = select.End - int(tss)
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     args = get_args()
     gb = int(args.gene_block)
     print('preparing')
-    pcawg_input = glob.glob('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/CNV/*.txt', sep='\t')
+    pcawg_input = glob.glob('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/CNV/*.txt')
     map1=pd.read_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/gencode_hg38_56354gene.csv')
     total_gene_list=list(chunks(map1.gene_id2.tolist(), 54))
     total_chrom_list=list(chunks(map1.chr.tolist(), 54))
