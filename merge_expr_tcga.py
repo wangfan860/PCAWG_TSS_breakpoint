@@ -33,5 +33,5 @@ if __name__ == '__main__':
     for df_ in input_list:
         df_csv=pd.read_csv(df_, sep='\t', header=None)
         df_csv.columns=['gene',os.path.basename(df_)]
-        test=pd.concat([test,df_csv[[os.path.basename(df_)]]], axis=1, ignore_index=True)
+        test=pd.concat([test,df_csv[[os.path.basename(df_)]]], axis=1)
     test.to_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/merged_fpkm.{}.csv'.format(gb), index=False)
