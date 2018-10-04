@@ -32,6 +32,6 @@ if __name__ == '__main__':
         print(os.path.basename(df_))
         df_csv=pd.read_csv(df_,index_col=0)
         df_csv.columns=['gene',os.path.basename(df_)]
-        ref1=pd.merge(ref1,df_csv, on='gene', how='inner')
+        ref1=pd.merge(ref1,df_csv, on='gene', how='left')
         print(os.path.basename(df_))
     ref1.to_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/merged_cnv_segment.{}.csv'.format(gb), index=False)
