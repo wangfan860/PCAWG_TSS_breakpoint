@@ -22,11 +22,13 @@ if __name__ == '__main__':
     args = get_args()
     gb = int(args.gene_block)
     input=glob.glob('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/CNV_bedtool/CNV/*merge.csv')
-
+    total_input_list=list(chunks(input, 10))
+    input_list = total_input_list[gb]
     ref=pd.read_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/gencode_hg38_56354gene.csv')
     ref1=ref[['gene_id2']]
     ref1.columns=['gene']
-    for df_ in input:
+
+    for df_ in input_list:
         print(os.path.basename(df_))
         df_csv=pd.read_csv(df_,index_col=0)
         df_csv.columns=['gene',os.path.basename(df_)]
