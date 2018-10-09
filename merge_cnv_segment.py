@@ -32,6 +32,7 @@ if __name__ == '__main__':
         print(os.path.basename(df_))
         df_csv=pd.read_csv(df_,index_col=0)
         df_csv.columns=['gene',os.path.basename(df_)]
-        ref1=pd.concat([ref1,df_csv], axis=1, join_axes=[ref1.gene])
-        print(os.path.basename(df_))
+        df_csv_nodup=df_csv.drop_duplicates(subset='gene', keep='first')
+        ref1=pd.merge(ref1,df_csv_nodup, on='gene', how='outer')
+
     ref1.to_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/merged_cnv_segment.{}.csv'.format(gb), index=False)
