@@ -34,4 +34,4 @@ if __name__ == '__main__':
         bigger=disease_expr[(disease_sv[j] >= 300000) | disease_sv[j].isnull()][j].astype(float).dropna()
         results = ss.ranksums(smaller, bigger)
         table = table.append({'cancer_type':'{}'.format(disease),'gene':j, 'pvalue':results[1]/2,'z_statistic':results[0],'samplesize_sv':len(smaller), 'samplesize_wosv':len(bigger)}, ignore_index=True)
-    table.to_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/tcga_ranksum_{}.csv'.format(disease))
+    table.to_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/300kb_tcga_ranksum_{}.csv'.format(disease))
