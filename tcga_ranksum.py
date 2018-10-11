@@ -21,7 +21,8 @@ if __name__ == '__main__':
     disease = args.disease_type
 
     distance_table1=pd.read_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/final_dis_56268x8990.csv',index_col=0)
-    expr=pd.read_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/final_exp_56268x8990..csv', index_col=0)
+    part_expr=pd.read_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/final_exp_56268x8990..csv', index_col=0)
+    expr=pd.concat([distance_table1[['barcode','project_id']],part_expr],axis=1)
 
     disease_sv=distance_table1[distance_table1.project_id == '{}'.format(disease)]
     disease_expr=expr[expr.project_id == '{}'.format(disease)]
