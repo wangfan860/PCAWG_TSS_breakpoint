@@ -20,7 +20,9 @@ if __name__ == '__main__':
     args = get_args()
     disease = args.disease_type
 
-    distance_table1=pd.read_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/final_dis_56268x8990.csv',index_col=0)
+    distance_table=pd.read_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/final_dis_56268x8990.csv',index_col=0)
+    distance_table0=distance_table.reset_index()
+    distance_table1=distance_table0.drop(['index'], axis=1)
     part_expr=pd.read_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/new_norm_exp.csv',index_col=0)
     expr=pd.concat([distance_table1[['barcode','project_id']],part_expr],axis=1)
 
