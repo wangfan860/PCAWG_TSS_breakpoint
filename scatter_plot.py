@@ -46,11 +46,11 @@ if __name__ == '__main__':
 
     with PdfPages('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/tcga_scatter_{}.pdf'.format(gene_id)) as pdf:
         gene=gene_id
-        official_gene=map1[map1.gene_id2==str(gene)]['gene_name']
+        official_gene=map1[map1.gene_id2==str(gene)]['gene_name'].values[0]
         mean_ex=cutoff_frame.loc[gene,'cutoff']
         gene_dis=disease_sv[gene]
         gene_ex=disease_expr[gene]
-        gene_dis1=gene_dis.fillna(10000000000)
+        gene_dis1=gene_dis.fillna(1000000)
         fig = plt.figure()
         ax = plt.gca()
         ax.grid(False)
