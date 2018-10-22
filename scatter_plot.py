@@ -2,6 +2,7 @@ import pandas as pd
 import scipy.stats as ss
 import numpy as np
 import matplotlib as mpl
+mpl.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.backends.backend_pdf import PdfPages

@@ -51,5 +51,7 @@ if __name__ == '__main__':
         b_high=bigger[bigger>= mean_ex]
         b_low=bigger[bigger< mean_ex]
         results = ss.fisher_exact([[len(s_high), len(b_high)], [len(s_low), len(b_low)]])
-        table = table.append({'gene':j, 'pvalue':results[1],'oddsratio':results[0]}, ignore_index=True)
+        table = table.append({'gene':j, 'pvalue':results[1],'oddsratio':results[0],
+        'sv_high':len(s_high),'sv_low':len(s_low),'wo_sv_high':len(b_high),
+        'wo_sv_low':len(b_low)}, ignore_index=True)
     table.to_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/tcga_fisher_{}.csv'.format(disease))
