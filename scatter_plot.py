@@ -58,7 +58,9 @@ if __name__ == '__main__':
         plt.axvline(100000, color='black',linestyle=':')
         plt.axhline(mean_ex, color='black',linestyle=':')
         ax.set_xscale('log')
+        ax.set_yscale('log')
         plt.xlabel('SV breakpoint to TSS')
-        plt.ylabel('normalized expression (FPKM-UQ))')
-        plt.title('str(official_gene) in str(disease)')
+        plt.ylabel('normalized expression (FPKM-UQ)')
+        format_list = [str(official_gene),str(disease)]
+        plt.title('{} in {}'.format(*format_list))
         pdf.savefig()
