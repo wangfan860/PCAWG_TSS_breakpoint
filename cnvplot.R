@@ -32,5 +32,5 @@ exampleData <- matrix(log2(rexp(1000)/rexp(1000)),nrow=200)
 evar <- apply(exampleData,1,var)
 mostVariable <- exampleData[evar>quantile(evar,0.75),]
 pdf("/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/test.pdf", width = 16, height = 8)
-heatmap.2(mostVariable,trace=”none”,col=greenred(10),key.title=start, key.xlab=end, key.ylab=gene)
+heatmap.2(mostVariable,trace='none',col=greenred(10),key.title=start, key.xlab=end, key.ylab=gene)
 dev.off()
