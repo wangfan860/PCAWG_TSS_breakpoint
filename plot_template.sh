@@ -9,4 +9,4 @@
 module load gcc/6.2.0
 module load R/3.5.0
 
-/apps/software/gcc-6.2.0/R/3.5.0/bin/Rscript /group/lyang-lab/fan/pcawg_data/PCAWG_TSS_breakpoint/cnvplot.R 1 2 3
+/apps/software/gcc-6.2.0/R/3.5.0/bin/Rscript /gpfs/data/lyang-lab/users/fan/pcawg_data/PCAWG_TSS_breakpoint/cnvplot.R 1 2 3

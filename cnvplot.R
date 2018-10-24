@@ -4,8 +4,8 @@ start <- args[1]
 end <- args[2]
 gene <- args[3]
 
-install.packages("ggplot2")
-install.packages("devtools")
+install.packages("ggplot2",repos = "http://cran.us.r-project.org")
+install.packages("devtools",repos = "http://cran.us.r-project.org")
 library(devtools)
 install_github("griffithlab/GenVisR")
 library('GenVisR')
@@ -22,7 +22,7 @@ genomeBoundaries$start <- 2000000
 genomeBoundaries$end <-   2350000
 cnSpec(Data2, y=genomeBoundaries[genomeBoundaries$chromosome=="chr11",], plotLayer = list(new_theme, geom_vline(xintercept = c(2150342, 2155364,2155439,2170833), colour="seagreen4", size=0.5, linetype=2)), x_title_size=0, facet_lab_size = 5, CNscale='absolute' )
 dev.off()
-install.packages(“gplots”)
+install.packages(“gplots”,repos = "http://cran.us.r-project.org")
 library(gplots)
 
 exampleData <- matrix(log2(rexp(1000)/rexp(1000)),nrow=200)
