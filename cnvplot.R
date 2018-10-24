@@ -25,7 +25,7 @@ genomeBoundaries$start <- 2000000
 genomeBoundaries$end <-   2350000
 cnSpec(data3, y=genomeBoundaries[genomeBoundaries$chromosome=="chr11",], plotLayer = list(new_theme, geom_vline(xintercept = c(2150342, 2155364,2155439,2170833), colour="seagreen4", size=0.5, linetype=2)), x_title_size=0, facet_lab_size = 5, CNscale='absolute' )
 dev.off()
-install.packages(“gplots”,repos = "http://cran.us.r-project.org")
+install.packages("gplots",repos = "http://cran.us.r-project.org")
 library(gplots)
 
 exampleData <- matrix(log2(rexp(1000)/rexp(1000)),nrow=200)
