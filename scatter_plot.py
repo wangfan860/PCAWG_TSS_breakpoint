@@ -57,9 +57,9 @@ if __name__ == '__main__':
         ax.scatter(gene_dis1 ,gene_ex , c='red', alpha=0.5, edgecolors='red')
         plt.axvline(100000, color='black',linestyle=':')
         plt.axhline(mean_ex, color='black',linestyle=':')
-        plt.ylim(top=(max(gene_ex))*10, bottom=(min(gene_ex))/10)
+        
         ax.set_xscale('log')
-        ax.set_yscale('log')
+
         plt.xlabel('SV breakpoint to TSS')
         plt.ylabel('normalized expression (FPKM-UQ)')
         format_list = [str(official_gene),str(disease)]
