@@ -44,24 +44,24 @@ if __name__ == '__main__':
     cutoff_normal=mean_normal + sd_normal*3
     cutoff_frame=cutoff_normal.to_frame(name='cutoff')
 
-    with PdfPages('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/tcga_scatter_{}.pdf'.format(gene_id)) as pdf:
-        gene=gene_id
-        official_gene=map1[map1.gene_id2==str(gene)]['gene_name'].values[0]
-        mean_ex=cutoff_frame.loc[gene,'cutoff']
-        gene_dis=disease_sv[gene]
-        gene_ex=disease_expr[gene]
-        gene_dis1=gene_dis.fillna(1000000)
+    gene=gene_id
+    official_gene=map1[map1.gene_id2==str(gene)]['gene_name'].values[0]
+    mean_ex=cutoff_frame.loc[gene,'cutoff']
+    gene_dis=disease_sv[gene]
+    gene_ex=disease_expr[gene]
+    gene_dis1=gene_dis.fillna(1000000)
+    format_list = [str(official_gene),str(disease)]
+
+    with PdfPages('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/tcga_scatter_{}_{}.pdf'.format(*format_list)) as pdf:
+
         fig = plt.figure()
         ax = plt.gca()
         ax.grid(False)
         ax.scatter(gene_dis1 ,gene_ex , c='red', alpha=0.5, edgecolors='red')
         plt.axvline(100000, color='black',linestyle=':')
         plt.axhline(mean_ex, color='black',linestyle=':')
-        
         ax.set_xscale('log')
-
         plt.xlabel('SV breakpoint to TSS')
         plt.ylabel('normalized expression (FPKM-UQ)')
-        format_list = [str(official_gene),str(disease)]
         plt.title('{} in {}'.format(*format_list))
         pdf.savefig()
