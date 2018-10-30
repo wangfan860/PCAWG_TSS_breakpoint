@@ -18,7 +18,7 @@ library('GenVisR')
 require(ggplot2)
 
 #define pdf file name
-file_name <- paste("/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/", deparse(substitute(args[1])),deparse(substitute(args[5])), ".pdf", sep="")
+file_name <- paste("/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/", args[1],deparse(substitute(args[5])), ".pdf", sep="")
 pdf(file_name, width = 16, height = 8)
 
 #cnv data
