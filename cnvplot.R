@@ -18,7 +18,7 @@ library('GenVisR')
 require(ggplot2)
 
 #define pdf file name
-file_name <- paste("/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/", deparse(substitute(cancer_type)),deparse(substitute(gene)), ".pdf", sep="")
+file_name <- paste("/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/", deparse(substitute(args[1])),deparse(substitute(args[5])), ".pdf", sep="")
 pdf(file_name, width = 16, height = 8)
 
 #cnv data
@@ -29,7 +29,7 @@ data3 <- subset(data2, select = -c(X, file_name,project_id, Segment_Mean))
 colnames(data3) <- c("chromosome", "start", "end", "sample","segmean")
 
 #expression data
-#expr <- read.csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/102418_normalized_tcga_expr_forheatmap.csv', header=T)
+expr <- read.csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/102418_normalized_tcga_expr_forheatmap.csv', header=T)
 expr1 <- expr[expr$project_id==cancer_type,]
 expr2 <- subset(expr1, select=c(barcode, project_id,gene))
 
