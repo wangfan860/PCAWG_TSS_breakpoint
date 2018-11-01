@@ -62,7 +62,7 @@ expheatmap <- heatmap.2(as.matrix(unique(data1)),
           density.info="none",  # turns off density plot inside color legend
           trace="none",         # turns off trace lines inside the heat map
           col=my_palette,  Rowv=FALSE,    # use on color palette defined earlier
-          Colv=FALSE,lmat = lmat, lwid = lwid, lhei = lhei)
+          Colv=FALSE)
 #gene positions
 gene=read.csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/gencode_hg38_geneposition_forplot.txt', sep='\t', header=T)
 chromstart = start
