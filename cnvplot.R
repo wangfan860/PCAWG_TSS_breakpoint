@@ -37,8 +37,13 @@ expr2 <- subset(expr1, select=c('barcode', 'project_id',as.character(gene)))
 #merge cnv and expr
 merge <- merge(expr2, data3, by.x = "barcode", by.y = "barcode")
 colnames(merge) <- c("barcode","project_id","gene","chromosome", "start", "end","segmean")
-merge1 <- merge[order(-merge$gene),]
-merge1$sample <- seq.int(nrow(merge1))
+merge$start[merge$start < start & merge$end > start] <- start
+merge$end[merge$start < end & merge$end > end] <- end
+merge2 <- merge[merge$start >= start,]
+merge3 <- merge2[merge2$end <= end,]
+merge4 <- merge3[order(-merge3$gene),]
+merge4$sample[merge4$gene > 0] <- rank(-merge4[merge4$gene > 0,]$gene,ties.method = 'min')
+merge4$sample [merge4$gene == 0] <- rank(merge4[merge4$gene == 0,]$barcode,ties.method = 'min') + nrow(merge4[merge4$gene > 0,])
 
 #cnvheatmap
 new_theme <- theme(panel.spacing.y = unit(0, "lines"), panel.border = element_rect(colour = "white", fill=NA, size=0), panel.grid.minor=element_line(colour="white", size=0),panel.grid.major =element_line(colour="white", size=0))
@@ -47,17 +52,17 @@ genomeBoundaries$chromStart <- 0
 colnames(genomeBoundaries) <- c("chromosome", "end", "start")
 genomeBoundaries$start <- start
 genomeBoundaries$end <-  end
-cnvheatmap <- cnSpec(merge1, y=genomeBoundaries[genomeBoundaries$chromosome==paste("chr",as.character(chrom),sep=""),], plotLayer = list(new_theme), x_title_size=0, facet_lab_size = 5, CNscale='absolute')
+cnvheatmap <- cnSpec(merge4, y=genomeBoundaries[genomeBoundaries$chromosome==paste("chr",as.character(chrom),sep=""),], plotLayer = list(new_theme), x_title_size=0, facet_lab_size = 5, CNscale='absolute')
 
 #expression_heatmap
-data1=merge1[c('gene')]
+data1=merge4[c('gene','sample')]
 data1$Gene=data1$gene
-#data1_log=log(data1+1)
+data2=unique(data1)[c('gene','Gene')]
 my_palette <- colorRampPalette(c("white",  "red"))(n = 601)
 lmat = rbind(c(0,2), c(3,1), c(4,1),c(0,1))
 lwid = c(1.5,1.5)
 lhei = c(0.5,2.5,2.5,2.5)
-expheatmap <- heatmap.2(as.matrix(unique(data1)),
+expheatmap <- heatmap.2(as.matrix(log10(data2+1)),
           notecol="black",      # change font color of cell labels to black
           density.info="none",  # turns off density plot inside color legend
           trace="none",         # turns off trace lines inside the heat map
