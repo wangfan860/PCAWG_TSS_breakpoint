@@ -46,13 +46,18 @@ merge4$sample[merge4$gene > 0] <- rank(-merge4[merge4$gene > 0,]$gene,ties.metho
 merge4$sample [merge4$gene == 0] <- rank(merge4[merge4$gene == 0,]$barcode,ties.method = 'min') + nrow(merge4[merge4$gene > 0,])
 
 #cnvheatmap
-new_theme <- theme(panel.spacing.y = unit(0, "lines"), panel.border = element_rect(colour = "white", fill=NA, size=0), panel.grid.minor=element_line(colour="white", size=0),panel.grid.major =element_line(colour="white", size=0))
+new_theme <- theme(panel.spacing.y = unit(0, "lines"),
+                  panel.border = element_rect(colour = NA, fill='transparent', size=0),
+                  panel.grid.minor=element_blank(),
+                  panel.grid.major =element_blank())
 genomeBoundaries <- aggregate(chromEnd ~ chrom, data=cytoGeno[cytoGeno$genome=="hg38",], max)
 genomeBoundaries$chromStart <- 0
 colnames(genomeBoundaries) <- c("chromosome", "end", "start")
 genomeBoundaries$start <- start
 genomeBoundaries$end <-  end
-cnvheatmap <- cnSpec(merge4, y=genomeBoundaries[genomeBoundaries$chromosome==paste("chr",as.character(chrom),sep=""),], plotLayer = list(new_theme), x_title_size=0, facet_lab_size = 5, CNscale='absolute')
+cnvheatmap <- cnSpec(merge4, y=genomeBoundaries[genomeBoundaries$chromosome==paste("chr",as.character(chrom),sep=""),],
+                    plotLayer = list(new_theme), x_title_size=0, y_title_size=0,
+                    facet_lab_size = 5, CNscale='absolute')
 
 #expression_heatmap
 data1=merge4[c('gene','sample')]
