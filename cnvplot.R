@@ -69,12 +69,13 @@ expheatmap <- heatmap.2(as.matrix(log10(data2+1)),
           col=my_palette,  Rowv=FALSE,    # use on color palette defined earlier
           Colv=FALSE)
 #gene positions
-gene_position=read.csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/gencode_hg38_geneposition_forplot.txt', sep='\t', header=T)
+gene_position<-read.csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/gencode_hg38_geneposition_forplot.csv', sep=',', header=T)
 chromosome <- paste("chr", as.character(chrom), sep="")
-gene_position2=gene_position[gene_position$chrom==chromosome,]
+gene_position$score <- '.'
+gene_position2 <- gene_position[gene_position$chrom==chromosome,]
 pg = plotGenes(gene_position2,chromosome,start,end,maxrows=15,bheight=0.15,
                plotgenetype="arrow",bentline=F,labeloffset=0.45 ,fontsize=0.6,
-               arrowlength = 0.05,labeltext=T, addarrow=F,col='blue')
+               arrowlength = 0.02,labeltext=T, addarrow=F,col='orange')
 labelgenome(chromosome, start,end,n=7,scale="Mb")
 #Define layout for the plots (2 rows, 2 columns)
 layt<-grid.layout(nrow=2,ncol=2,heights=c(8/10,2/10),widths=c(3/8,5/8),default.units=c('null','null'))
