@@ -76,7 +76,7 @@ gene_position2 <- gene_position[gene_position$chrom==chromosome,]
 pg = plotGenes(gene_position2,chromosome,as.numeric(start),as.numeric(end),maxrows=15,bheight=0.15,
                plotgenetype="arrow",bentline=F,labeloffset=0.45 ,fontsize=0.6,
                arrowlength = 0.02,labeltext=T, addarrow=F,col='orange')
-labelgenome(chromosome, start,end,n=7,scale="Mb")
+labelgenome(chromosome,as.numeric(start),as.numeric(end),n=7,scale="Mb")
 #Define layout for the plots (2 rows, 2 columns)
 layt<-grid.layout(nrow=2,ncol=2,heights=c(8/10,2/10),widths=c(3/8,5/8),default.units=c('null','null'))
 #Draw plots one by one in their positions
