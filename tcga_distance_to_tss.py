@@ -16,8 +16,14 @@ def get_args():
     return parser.parse_args()
 
 def Distance_to_tss(bedpe, chr, tss):
-    #read one bedpe file
-    aliquot_id_data = pd.read_csv(bedpe, sep='\t')
+    wgs = pd.read_csv(bedpe, sep='\t')
+    chrom=[]
+    bpt=[]
+    for index, row in wgs.drop(wgs.index[len(wgs)-1]).iterrows():
+        if row['end'] +1 == wgs.iloc[index +1]['start'] and row['total_cn']!=wgs.iloc[index +1]['total_cn']:
+            bpt.append(row['end'])
+            chrom.append(row['chromosome'])
+
     select = aliquot_id_data[aliquot_id_data.Chromosome.astype(str) == str(chr)]
     distance_1 = select.Start - int(tss)
     distance_2 = select.End - int(tss)
