@@ -56,5 +56,5 @@ if __name__ == '__main__':
 
     df = table_list[0]
     for df_ in table_list[1:]:
-        df = df.merge(df_, on='CNV_file_name')
+        df = df.merge(df_, on='barcode')
     df.to_csv('/gpfs/data/lyang-lab/users/fan/breakpoint_tcga/remove_50kb/TCGA_rm50kb_distance_to_tss.{}.csv'.format(gb), index=False)
