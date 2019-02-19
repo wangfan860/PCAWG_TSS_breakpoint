@@ -84,4 +84,4 @@ if __name__ == '__main__':
     df = table_list[0]
     for df_ in table_list[1:]:
         df = df.merge(df_, on='aliquot_id')
-    df.to_csv('/gpfs/data/lyang-lab/fan/LUAD_driverless/Table_distance_to_tss.{}.csv'.format(gb), index=False)
+    df.to_csv('/gpfs/data/lyang-lab/users/fan/LUAD_driverless/Table_distance_to_tss.{}.csv'.format(gb), index=False)
